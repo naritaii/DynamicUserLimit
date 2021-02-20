@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['dynamic_limit.py'],
+a = Analysis(['DynamicUserLimit.py'],
              pathex=['C:\\Users\\lilyh\\source\\repos\\DynamicUserLimit\\DynamicUserLimit'],
              binaries=[],
              datas=[],
