@@ -2,7 +2,10 @@
 import os
 
 import discord
+from discord.client import Client
+from discord.errors import HTTPException
 from dotenv import load_dotenv
+import logging
 
 load_dotenv() # Load .env
 TOKEN = os.getenv('DISCORD_TOKEN') # Grab token stored as environmental variable
@@ -34,6 +37,11 @@ async def on_voice_state_update(member, before, after): # On member leave, move,
             if user_limit>1: # Don't set to no limit if limit is 1 for whatever reason
                 await old_channel.edit(user_limit=user_limit-1) # Decrement user limit
 
-
-
-client.run(TOKEN) # Connect to Discord using token
+try:
+    client.run(TOKEN, bot=True)
+except discord.client.LoginFailure as e:
+    print("\n\nLogin unsuccessful. Improper token.\n\n\n")
+    raise e
+except AttributeError as e:
+    print("\n\nLogin unsuccessful. Token is NoneType, is the .env set up properly?\n\n\n")
+    raise e
