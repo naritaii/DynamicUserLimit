@@ -22,10 +22,8 @@ class CustomClient(commands.Bot): # Custom bot object
 client = CustomClient()
 
 @client.event
-
-@client.event
 async def on_voice_state_update(member, before, after): # On member leave, move, or join on voice channels
-    if member==client.get_user: return # Ignore this bot
+    if member is client.get_user: return # Ignore this bot
         
     new_channel = after.channel
     old_channel = before.channel
@@ -60,8 +58,10 @@ async def join(ctx):
 @client.command(name="help",aliases=["h","info","i","in"])
 async def help(ctx):
     icon = client.user.avatar_url
+    emoji = client.get_emoji(766352487984660480)
+    emoji_placeholder = "" if emoji is None else f"{emoji} "
 
-    embed=discord.Embed(title="{} Information".format(client.get_emoji(766352487984660480)), description=" ", color=0xffc0cb)
+    embed=discord.Embed(title=f"{emoji_placeholder}Information", description=" ", color=0xffc0cb)
     embed.set_author(name="Dynamic Voice Channel User Limit",
         url="https://github.com/naritaii/DynamicUserLimit", icon_url=icon)
     embed.set_thumbnail(url=icon)
