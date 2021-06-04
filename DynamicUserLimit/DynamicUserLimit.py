@@ -23,7 +23,7 @@ client = CustomClient()
 
 @client.event
 async def on_voice_state_update(member, before, after): # On member leave, move, or join on voice channels
-    if member.user.id is client.user.id: return # Ignore this bot
+    if member.id is client.user.id: return # Ignore this bot
         
     new_channel = after.channel
     old_channel = before.channel
