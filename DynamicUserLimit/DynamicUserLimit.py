@@ -127,6 +127,7 @@ async def join(ctx):
     connected = ctx.author.voice
     if connected:
         await connected.channel.connect()
+    return
 
 @client.command(name="help",aliases=["h","info","i","in"])
 async def help(ctx):
