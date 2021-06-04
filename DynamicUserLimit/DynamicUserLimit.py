@@ -23,7 +23,7 @@ client = CustomClient()
 
 @client.event
 async def on_voice_state_update(member, before, after): # On member leave, move, or join on voice channels
-    if member is client.get_user: return # Ignore this bot
+    if member.user.id is client.user.id: return # Ignore this bot
         
     new_channel = after.channel
     old_channel = before.channel
@@ -51,8 +51,8 @@ async def safelogout(ctx):
 @client.command(name="join",aliases=["j"])
 async def join(ctx):
     author = ctx.message.author
-    channel = author.voice_channel
-    await bot.join_voice_channel(channel)
+    channel = author.voice.channel
+    await channel.connect()
 
 @client.command(name="help",aliases=["h","info","i","in"])
 async def help(ctx):
